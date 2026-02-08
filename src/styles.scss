@@ -1,0 +1,29 @@
+body {
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.ui-accordion-header .ui-accordion-header-icon {
+  background: url("../public/images/down.png");
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: calc(50% - 6px);
+  right: 28px;
+}
+
+.ui-accordion-header-active .ui-accordion-header-icon {
+  background-image: url("../public/images/up.png");
+  transform: rotate(3deg);
+}
+
+@import 'bootstrap/scss/bootstrap';

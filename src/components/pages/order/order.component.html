@@ -1,0 +1,109 @@
+<section class="order py-4">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-5" id="order-title">Оформление заказа</h2>
+    <div class="row justify-content-center">
+      <form class="col-lg-7" id="form" novalidate [formGroup]="checkoutForm" *ngIf="!(isSuccess && !hasError)">
+        <div class="row">
+          <div class="mb-3 text-black">
+            <label class="form-label" for="exampleInputProduct">Товар</label>
+            <input type="text" class="form-control" id="exampleInputProduct" formControlName="product">
+          </div>
+          <div class="mb-3 col-sm-4 text-black">
+            <label for="exampleInputName" class="form-label">Имя</label>
+            <input type="text" class="form-control"
+                   [class.is-invalid]="checkoutForm.get('name')?.invalid && (checkoutForm.get('name')?.touched || checkoutForm.get('name')?.dirty)"
+                   id="exampleInputName" formControlName="name">
+            <div *ngIf="checkoutForm.get('name')?.invalid && (checkoutForm.get('name')?.touched || checkoutForm.get('name')?.dirty)">
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('name')?.errors?.['required']">
+                Введите имя
+              </div>
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('name')?.errors?.['pattern']">
+                Имя может содержать только буквы
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 col-sm-4 text-black">
+            <label for="exampleInputLastName" class="form-label">Фамилия</label>
+            <input type="text" class="form-control"
+                   [class.is-invalid]="checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || checkoutForm.get('lastName')?.dirty)"
+                   id="exampleInputLastName" formControlName="lastName">
+            <div *ngIf="checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || checkoutForm.get('lastName')?.dirty)">
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('lastName')?.errors?.['required']">
+                Введите фамилию
+              </div>
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('lastName')?.errors?.['pattern']">
+                Фамилия может содержать только буквы
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 col-sm-4 text-black">
+            <label class="form-label" for="exampleInputPhone">Телефон</label>
+            <input type="tel" class="form-control"
+                   [class.is-invalid]="checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || checkoutForm.get('phone')?.dirty)"
+                   id="exampleInputPhone" formControlName="phone">
+            <div *ngIf="checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || checkoutForm.get('phone')?.dirty)">
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('phone')?.errors?.['required']">
+                Введите телефон
+              </div>
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('phone')?.errors?.['pattern']">
+                Телефон должен содержать 11 цифр
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 col-sm-6 text-black">
+            <label for="exampleInputCountry" class="form-label">Страна</label>
+            <input type="text" class="form-control"
+                   [class.is-invalid]="checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || checkoutForm.get('country')?.dirty)"
+                   id="exampleInputCountry" formControlName="country">
+            <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('country')?.invalid
+            && (checkoutForm.get('country')?.touched || checkoutForm.get('country')?.dirty)
+            && checkoutForm.get('country')?.errors?.['required']">
+              Введите страну
+            </div>
+          </div>
+          <div class="mb-3 col-sm-6 text-black">
+            <label for="exampleInputIndex" class="form-label">Индекс</label>
+            <input type="text" class="form-control"
+                   [class.is-invalid]="checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || checkoutForm.get('zip')?.dirty)"
+                   id="exampleInputIndex" formControlName="zip">
+            <div *ngIf="checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || checkoutForm.get('zip')?.dirty)">
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('zip')?.errors?.['required']">
+                Введите индекс
+              </div>
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('zip')?.errors?.['pattern']">
+                Индекс должен содержать 6 цифр
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 text-black">
+            <label class="form-label" for="exampleInputAddress">Адрес</label>
+            <input type="text" class="form-control"
+                   [class.is-invalid]="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || checkoutForm.get('address')?.dirty)"
+                   id="exampleInputAddress" formControlName="address">
+            <div *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || checkoutForm.get('address')?.dirty)">
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('address')?.errors?.['required']">
+                Введите адрес
+              </div>
+              <div class="invalid-feedback d-block" *ngIf="checkoutForm.get('address')?.errors?.['pattern']">
+                Адрес должен содержать: буквы, цифры, пробелы, дефис и слеш
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 text-black">
+            <label class="form-label" for="exampleInputComment">Комментарий к заказу</label>
+            <textarea class="form-control" id="exampleInputComment" formControlName="comment"></textarea>
+          </div>
+          <div class="mt-3 text-black d-flex justify-content-between">
+            <button id="button" class="btn btn-primary px-4" [disabled]="disabled" (click)="createOrder()">Отправить</button>
+            <div class="text-danger fs-3" *ngIf="!isSuccess && hasError">
+              Произошла ошибка. Попробуйте еще раз.
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="text-center fs-3" id="thanks" *ngIf="isSuccess && !hasError">
+        Спасибо за заказ!
+      </div>
+    </div>
+  </div>
+</section>

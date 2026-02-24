@@ -63,7 +63,7 @@
               ],
               "outputHashing": "all",
               "outputPath": {
-                "base": "files",
+                "base": "docs",
                 "browser": ""
               }
             },

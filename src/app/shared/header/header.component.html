@@ -1,0 +1,29 @@
+<header>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary px-1">
+    <div class="container-fluid py-1">
+      <a class="navbar-brand" href="#">Logo</a>
+      <button class="navbar-toggler" type="button"
+              (click)="isMenuCollapsed = !isMenuCollapsed"
+              [attr.aria-expanded]="!isMenuCollapsed"
+              aria-controls="navbarSupportedContent"
+              aria-label="Переключатель навигации">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isMenuCollapsed">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="''" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'/products'" routerLinkActive="active">Каталог</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search" (submit)="search(); $event.preventDefault()">
+          <input class="form-control me-2 px-1" type="search" placeholder="Поиск..." aria-label="Поиск"
+                 [formControl]="searchValue" (search)="search()" (keyup.enter)="search()">
+          <button class="btn btn-outline-primary px-4" type="submit">Найти</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>

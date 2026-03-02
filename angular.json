@@ -65,7 +65,8 @@
               "outputPath": {
                 "base": "docs",
                 "browser": ""
-              }
+              },
+              "baseHref": "/tea-angular/"
             },
             "development": {
               "outputPath": {
